@@ -3,6 +3,7 @@
 // import icons
 import { CgClose } from "react-icons/cg";
 import { navData } from "../data";
+import { Link } from "react-router-dom";
 interface HeaderProps {
   setNavMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -25,6 +26,12 @@ const NavMobile: React.FC<HeaderProps> = ({ setNavMobile }) => {
             </li>
           );
         })}
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
       </ul>
     </nav>
   );

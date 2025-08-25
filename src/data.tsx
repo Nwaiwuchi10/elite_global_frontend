@@ -9,8 +9,8 @@ export const navData: NavItem[] = [
   { name: "Features", href: "#" },
   { name: "About", href: "#" },
   { name: "Contact", href: "#" },
-  { name: "Register", href: "/register" },
-  { name: "Login", href: "/login" },
+  // { name: "Register", href: "/register" },
+  // { name: "Login", href: "/login" },
 ];
 
 // import images
