@@ -4,11 +4,11 @@ import { TradingAccountApi } from "../../Api/Api";
 import UserDashboardLayout from "../UserDashboard/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 
-interface WithdrawalFormProps {
-  clientId: string; // pass from parent (logged-in user)
-}
+// interface WithdrawalFormProps {
+//   clientId: string; // pass from parent (logged-in user)
+// }
 
-const WithdrawalForm: React.FC<WithdrawalFormProps> = () => {
+const WithdrawalForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     amount: "",

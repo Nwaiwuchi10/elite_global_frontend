@@ -1,4 +1,5 @@
 // import data
+
 import { navData } from "../data";
 
 const Nav = () => {

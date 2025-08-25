@@ -1,9 +1,12 @@
 // import data
-import { navData } from "../data";
+
 // import icons
 import { CgClose } from "react-icons/cg";
-
-const NavMobile = ({ setNavMobile }) => {
+import { navData } from "../data";
+interface HeaderProps {
+  setNavMobile: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const NavMobile: React.FC<HeaderProps> = ({ setNavMobile }) => {
   return (
     <nav className="bg-blue-900 h-full top-0 bottom-0 w-80 flex justify-center items-center">
       {/* close btn */}

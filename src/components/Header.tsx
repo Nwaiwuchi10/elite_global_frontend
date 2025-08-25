@@ -5,8 +5,10 @@ import AccountBtns from "./AccountBtns";
 
 // import icons
 import { CgMenuRight } from "react-icons/cg";
-
-const Header = ({ setNavMobile }) => {
+interface HeaderProps {
+  setNavMobile: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const Header: React.FC<HeaderProps> = ({ setNavMobile }) => {
   return (
     <header
       className="py-[30px] lg:pt-[60px]"
