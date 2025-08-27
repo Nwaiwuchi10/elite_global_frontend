@@ -23,7 +23,7 @@ const TradingViewChart: React.FC = () => {
         new (window as any).TradingView.widget({
           container_id: container.current.id,
           autosize: true,
-          symbol: "FX:USDJPY", // Change pair here
+          symbol: "BINANCE:BTCUSDT",
           interval: "D",
           timezone: "Etc/UTC",
           theme: "dark",

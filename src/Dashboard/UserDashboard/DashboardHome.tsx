@@ -1,5 +1,6 @@
 import UserDashboardLayout from "./DashboardLayout";
 import TradingViewChart from "../../components/TradingViewChart";
+import TradingTicker from "../../components/TradingTicker";
 
 const DashboardHome = () => {
   return (
@@ -25,6 +26,7 @@ const DashboardHome = () => {
           <TradingViewChart />
         </div>
       </div>
+      <TradingTicker />
     </UserDashboardLayout>
   );
 };

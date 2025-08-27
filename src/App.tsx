@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Homepage from "./pages/Home/Homepage";
 import LanguageSelector from "./components/LanguageSelector";
@@ -20,13 +20,27 @@ import ReferralAccountScreen from "./Dashboard/ReferalAccount/ReferalAccount";
 import WithdrawalForm from "./Dashboard/WithdrawalRequest/WithdrawalForm";
 import WithdrawalTable from "./AdminDashboard/Withdrawals/WithdrawalReques";
 import Whatsapp from "./components/Whatsapp";
+import { useEffect } from "react";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+
+    if (userId) {
+      // ✅ If logged in, go to dashboard
+      navigate("/dashboard", { replace: true });
+    } else {
+      // ❌ If not logged in, go to home
+      navigate("/", { replace: true });
+    }
+  }, []);
   return (
     <>
       <div className="bg-darkblue">
         <LanguageSelector />
-        <Whatsapp />
+        {/* <Whatsapp /> */}
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/register" element={<Register />} />

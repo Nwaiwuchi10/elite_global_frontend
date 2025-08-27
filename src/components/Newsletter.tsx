@@ -14,11 +14,19 @@ const Newsletter = () => {
         >
           {/* text */}
           <div className="flex-1 w-full">
-            <h3 className="h3 mb-4">Start mining now</h3>
-            <p className="max-w-[348px] mb-8">
+            <h2 className="h3 mb-4">Start mining now</h2>
+            <h3 className="max-w-[348px] mb-4">
               Join now with Elite Globe to get the latest news and start mining
               now
-            </p>
+            </h3>
+
+            <h3 className="max-w-[348px] mb-4">
+              Office address:{" "}
+              <span>252 HICKORY AVE TENAFLY NJ 07670-1435 USA</span>
+            </h3>
+            <h3 className="max-w-[348px] mb-4">
+              Anything else? just call us: <span>+1 618 227 4072</span>
+            </h3>
           </div>
           <NewsletterForm />
         </div>

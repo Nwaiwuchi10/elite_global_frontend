@@ -1,8 +1,8 @@
 // src/layouts/UserDashboardLayout.tsx
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../../assets/img/bitcon.png";
 interface UserDashboardLayoutProps {
   children: React.ReactNode;
 }
@@ -10,8 +10,14 @@ interface UserDashboardLayoutProps {
 const UserDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
   children,
 }) => {
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.removeItem("userId"); // clear userId
+    localStorage.removeItem("user");
+    navigate("/", { replace: true }); // redirect to home
+  };
   return (
     <div className="flex h-screen bg-white text-darkblue">
       {/* Sidebar */}
@@ -47,7 +53,7 @@ const UserDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
             ⚙️ Settings
           </a>
           <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
-            🚪 Logout
+            <p onClick={handleLogout}>🚪 Logout</p>
           </a>
         </nav>
       </aside>
@@ -61,7 +67,25 @@ const UserDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
             {/* Dark blue menu icon */}
           </button>
           <h1 className="text-lg font-semibold text-blue-900">
-            Welcome Back 👋
+            <a href="#">
+              <span className="flex justify-evenly items-center gap-6">
+                <span style={{ width: "auto", height: "30px" }}>
+                  {" "}
+                  <img
+                    src={Logo}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />{" "}
+                </span>
+
+                <span className="text-2xl font-extrabold"> Elite Globe</span>
+              </span>
+            </a>
+            {/* Welcome Back 👋 */}
           </h1>
           <div className="flex items-center space-x-3">
             <img
