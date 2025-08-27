@@ -19,7 +19,7 @@ import TradingAccountScreen from "./Dashboard/TradingAccount/TradingAccount";
 import ReferralAccountScreen from "./Dashboard/ReferalAccount/ReferalAccount";
 import WithdrawalForm from "./Dashboard/WithdrawalRequest/WithdrawalForm";
 import WithdrawalTable from "./AdminDashboard/Withdrawals/WithdrawalReques";
-import Whatsapp from "./components/Whatsapp";
+// import Whatsapp from "./components/Whatsapp";
 import { useEffect } from "react";
 
 function App() {
