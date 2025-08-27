@@ -55,6 +55,9 @@ const UserDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
           <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
             <p onClick={handleLogout}>🚪 Logout</p>
           </a>
+          <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
+            <Link to="/adminPage">Admin Link(for test) </Link>
+          </a>
         </nav>
       </aside>
 
