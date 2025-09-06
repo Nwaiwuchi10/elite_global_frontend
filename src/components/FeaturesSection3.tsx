@@ -1,5 +1,6 @@
 // import image
 import video from "../assets/newww-vmake.mp4";
+import video1 from "../assets/manTest.mp4";
 import Image3 from "../assets/img/feature-3-img.png";
 
 const FeaturesSection3 = () => {
@@ -39,6 +40,16 @@ const FeaturesSection3 = () => {
           className="w-full h-84 mt-32 max-w-3xl rounded-xl border-4 border-blue-950 shadow-lg"
         >
           <source src={video} />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div className="flex justify-center items-center w-full">
+        <video
+          controls
+          muted
+          className="w-full h-84 mt-32 max-w-3xl rounded-xl border-4 border-blue-950 shadow-lg"
+        >
+          <source src={video1} />
           Your browser does not support the video tag.
         </video>
       </div>

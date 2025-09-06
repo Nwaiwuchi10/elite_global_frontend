@@ -56,9 +56,14 @@ const Login: React.FC = () => {
 
       // Save user to localStorage
       localStorage.setItem("user", JSON.stringify(res.data));
+      localStorage.setItem("isAdmin", res.data.isAdmin);
       localStorage.setItem("userId", res.data.userId);
 
-      navigate("/dashboard");
+      if (res.data.isAdmin === true) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (err: any) {
       const msg =
         err?.response?.data?.message || err?.message || "Login failed";

@@ -31,6 +31,7 @@ interface Deposit {
 const DepositTable: React.FC = () => {
   const [deposits, setDeposits] = useState<Deposit[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingId, setLoadingId] = useState<string | null>(null);
   const [message, setMessage] = useState("");
 
   // Fetch deposits
@@ -53,15 +54,15 @@ const DepositTable: React.FC = () => {
   // Approve deposit
   const approveDeposit = async (id: string) => {
     try {
-      setLoading(true);
+      setLoadingId(id); // only this row is loading
       const res = await axios.patch(`${GetAllDepositApi}/${id}/approve`);
       setMessage(res.data.message);
-      await fetchDeposits(); // refresh deposits after update
+      await fetchDeposits();
     } catch (error: any) {
       console.error("Error approving deposit:", error);
       setMessage(error.response?.data?.message || "Approval failed");
     } finally {
-      setLoading(false);
+      setLoadingId(null); // reset after completion
     }
   };
 
@@ -130,10 +131,12 @@ const DepositTable: React.FC = () => {
                       {!deposit.approvePayment ? (
                         <button
                           onClick={() => approveDeposit(deposit._id)}
-                          disabled={loading}
+                          disabled={loadingId === deposit._id} // only disable this row's button
                           className="px-4 py-1 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-sm text-sm"
                         >
-                          Approve
+                          {loadingId === deposit._id
+                            ? "Approving..."
+                            : "Approve"}
                         </button>
                       ) : (
                         <span className="text-blue-900">Already Approved</span>

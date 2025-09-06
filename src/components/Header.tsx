@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ setNavMobile }) => {
         <a href="#">
           <span className="flex justify-evenly items-center gap-6">
             <img src={Logo} alt="" />{" "}
-            <span className="text-2xl font-extrabold"> Elite Globe</span>
+            <span className="text-2xl font-extrabold">Wealth Globe</span>
           </span>
         </a>
         {/* nav & btns */}

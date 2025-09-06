@@ -22,7 +22,9 @@ const Why = () => {
             data-aos="fade-left"
             data-aos-offset="400"
           >
-            <h2 className="section-title">Why you should choose Elite Globe</h2>
+            <h2 className="section-title">
+              Why you should choose Wealth Globe Investment
+            </h2>
             <p className="section-subtitle">
               Experience the next generation Bitcoin platform. No financial
               borders, extra fees, and fake reviews.

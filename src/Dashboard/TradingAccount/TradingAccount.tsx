@@ -2,20 +2,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserDashboardLayout from "../UserDashboard/DashboardLayout";
-import { TradingAccountApi } from "../../Api/Api";
-import { useNavigate } from "react-router-dom";
+import { GetAllDepositApi, TradingAccountApi } from "../../Api/Api";
+import { Link, useNavigate } from "react-router-dom";
 
 interface TradingAccount {
   availableBalance: number;
   totalWithdrawal: number;
-  earnedFunds: number;
+  earnedFund: number;
   totalDeposits: number;
   cumulative: number;
+}
+interface TransactSum {
+  totalWithdrawals: number;
+  totalDeposits: number;
+}
+interface DepoSum {
+  totalDeposits: number;
 }
 
 const TradingAccountScreen: React.FC = () => {
   const navigate = useNavigate();
   const [account, setAccount] = useState<TradingAccount | null>(null);
+  const [depositSum, setDeposiSum] = useState<DepoSum | null>(null);
+  const [transactionSum, setTransaction] = useState<TransactSum | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const userId = localStorage.getItem("userId");
@@ -36,7 +45,34 @@ const TradingAccountScreen: React.FC = () => {
     };
     fetchAccount();
   }, []);
-
+  useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${TradingAccountApi}/summary/${userId}`);
+        setTransaction(res.data);
+      } catch (err: any) {
+        setError("Failed to load trading account.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAccount();
+  }, []);
+  useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${GetAllDepositApi}/total/${userId}`);
+        setDeposiSum(res.data);
+      } catch (err: any) {
+        setError("Failed to load trading account.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAccount();
+  }, []);
   return (
     <UserDashboardLayout>
       <div className="p-6">
@@ -89,7 +125,7 @@ const TradingAccountScreen: React.FC = () => {
                 Total Withdrawal
               </h2>
               <p className="text-2xl font-bold text-blue-900 mt-4">
-                ${account.totalWithdrawal}
+                ${transactionSum?.totalWithdrawals || 0}
               </p>
             </div>
 
@@ -99,7 +135,7 @@ const TradingAccountScreen: React.FC = () => {
                 Earned Funds
               </h2>
               <p className="text-2xl font-bold text-blue-900 mt-4">
-                ${account.earnedFunds}
+                ${account?.earnedFund}
               </p>
             </div>
 
@@ -109,7 +145,7 @@ const TradingAccountScreen: React.FC = () => {
                 Total Deposits
               </h2>
               <p className="text-2xl font-bold text-blue-900 mt-4">
-                ${account.totalDeposits}
+                ${depositSum?.totalDeposits || 0}
               </p>
             </div>
 
@@ -119,7 +155,7 @@ const TradingAccountScreen: React.FC = () => {
                 Cumulative
               </h2>
               <p className="text-2xl font-bold text-blue-900 mt-4">
-                ${account.cumulative}
+                ${account?.earnedFund}
               </p>
             </div>
 
@@ -132,7 +168,7 @@ const TradingAccountScreen: React.FC = () => {
                 Click button below to view deposit transaction history...
               </p>
               <button className="mt-4 px-4 py-2 bg-blue-900 text-white rounded-xl font-semibold hover:bg-blue-700">
-                Deposit History
+                <Link to="/dashboard/deposit-history"> Deposit History</Link>
               </button>
             </div>
 
@@ -145,7 +181,10 @@ const TradingAccountScreen: React.FC = () => {
                 Click button below to view withdrawal transaction history...
               </p>
               <button className="mt-4 px-4 py-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-500">
-                Withdrawal History
+                <Link to="/dashboard/withdrawal-history">
+                  {" "}
+                  Withdrawal History
+                </Link>
               </button>
             </div>
           </div>

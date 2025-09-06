@@ -1,7 +1,6 @@
 // import images
 import Logo from "../assets/img/bitcoin.png";
-import VisaImg from "../assets/img/visa.png";
-import MastercardImg from "../assets/img/mastercard.png";
+
 import BitcoinImg from "../assets/img/bitcoin.png";
 
 // import icons
@@ -25,7 +24,7 @@ const Footer = () => {
             <a href="#">
               <span className="flex justify-evenly items-center gap-6">
                 <img src={Logo} alt="" />{" "}
-                <span className="text-2xl font-extrabold"> Elite Globe</span>
+                <span className="text-2xl font-extrabold"> Bit Globe</span>
               </span>
             </a>
           </div>
@@ -101,8 +100,8 @@ const Footer = () => {
                 We accept following payment systems
               </h3>
               <div className="flex justify-center items-center gap-6">
-                <img src={VisaImg} alt="" />
-                <img src={MastercardImg} alt="" />
+                {/* <img src={VisaImg} alt="" />
+                <img src={MastercardImg} alt="" /> */}
                 <img src={BitcoinImg} alt="" />
               </div>
             </div>
@@ -113,7 +112,7 @@ const Footer = () => {
       <div className="py-12">
         <div className="container mx-auto flex flex-col items-center gap-y-6 lg:flex-row lg:justify-between lg:gap-y-0">
           {/* copy text */}
-          <div>&copy; 2025 Elite Globe. All rights reserved.</div>
+          <div>&copy; 2025 Wealth Globe. All rights reserved.</div>
           {/* social icons */}
           <div className="flex text-2xl gap-x-8">
             <a className="hover:text-blue transition" href="#">

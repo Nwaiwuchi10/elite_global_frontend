@@ -18,7 +18,8 @@ const UserInvestPlan: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [plan, setPlan] = useState<InvestmentPlan | null>(null);
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<string>("");
+  // useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -44,7 +45,7 @@ const UserInvestPlan: React.FC = () => {
       const res = await axios.post(`${UserInvestPlanApi}/${plan._id}`, {
         clientId,
         investmentplanId: plan._id,
-        amount,
+        amount: Number(amount),
       });
       setMessage(res.data.message || "Investment successful!");
       navigate("/dashboard");
@@ -89,7 +90,8 @@ const UserInvestPlan: React.FC = () => {
               <input
                 type="number"
                 value={amount}
-                onChange={(e) => setAmount(Number(e.target.value))}
+                // onChange={(e) => setAmount(Number(e.target.value))}
+                onChange={(e) => setAmount(e.target.value)}
                 className="w-full text-black border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-900"
               />
             </div>

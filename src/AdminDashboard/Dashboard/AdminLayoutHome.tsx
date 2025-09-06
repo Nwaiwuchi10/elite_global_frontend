@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminDashboardLayout from "./AdminDashboard";
 import { GetAllUsersApi } from "../../Api/Api";
+import { Link } from "react-router-dom";
 
 interface User {
   _id: string;
@@ -98,8 +99,10 @@ const AdminDashboardHome: React.FC = () => {
                         <td className="px-4 py-3 font-medium text-blue-900">
                           {user.firstName} {user.lastName}
                         </td>
-                        <td className="px-4 py-3 text-blue-900">
-                          {user.email}
+                        <td className="px-4 py-3 text-blue-900 underline">
+                          <Link to={`/admin/dashboard/users/page/${user._id}`}>
+                            {user.email}
+                          </Link>
                         </td>
                         <td className="px-4 py-3 text-blue-900">
                           {user.country}

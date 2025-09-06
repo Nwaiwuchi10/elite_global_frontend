@@ -21,14 +21,22 @@ import WithdrawalForm from "./Dashboard/WithdrawalRequest/WithdrawalForm";
 import WithdrawalTable from "./AdminDashboard/Withdrawals/WithdrawalReques";
 // import Whatsapp from "./components/Whatsapp";
 import { useEffect } from "react";
+import Manuplate from "./AdminDashboard/UserManuplatePage/Manuplate";
+import UserWithdrawalTable from "./Dashboard/WithdrawalRequest/WithdrawalTable";
+import UserDepositTableHistory from "./Dashboard/Deposit/UserDepositHistory";
+import ViewProfile from "./Dashboard/ViewProfile/ViewProfile";
+import ChangePassword from "./Dashboard/PasswordChange/ChangePassword";
 
 function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
 
-    if (userId) {
+    if (isAdmin) {
+      navigate("/admin/dashboard", { replace: true });
+    } else if (userId) {
       // ✅ If logged in, go to dashboard
       navigate("/dashboard", { replace: true });
     } else {
@@ -39,7 +47,11 @@ function App() {
   return (
     <>
       <div className="bg-darkblue">
-        <LanguageSelector />
+        {/* <Support /> */}
+        <div style={{ position: "absolute", top: 10, right: 10, zIndex: 1000 }}>
+          <LanguageSelector />
+        </div>
+
         {/* <Whatsapp /> */}
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -47,7 +59,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<DashboardHome />} />
           <Route path="/dashboard/deposit" element={<Deposit />} />
-          <Route path="/adminPage" element={<AdminDashboardHome />} />
+          <Route path="/admin/dashboard" element={<AdminDashboardHome />} />
           <Route path="/add/wallet" element={<AdminAddWalletForm />} />
           <Route path="/add/plan" element={<AdminAddPlanForm />} />
           <Route path="/view/wallet" element={<AdminWalletTable />} />
@@ -66,6 +78,20 @@ function App() {
           />
           <Route path="/dashboard/withdrawal" element={<WithdrawalForm />} />
           <Route path="/view/withdrawals" element={<WithdrawalTable />} />
+          <Route
+            path="admin/dashboard/users/page/:id"
+            element={<Manuplate />}
+          />
+          <Route
+            path="dashboard/withdrawal-history"
+            element={<UserWithdrawalTable />}
+          />
+          <Route
+            path="dashboard/deposit-history"
+            element={<UserDepositTableHistory />}
+          />
+          <Route path="profile" element={<ViewProfile />} />
+          <Route path="change-password" element={<ChangePassword />} />
         </Routes>
       </div>
     </>

@@ -35,7 +35,7 @@ const Trade = () => {
   }, []);
 
   return (
-    <section className="section py-20 bg-[#0a192f] text-white">
+    <section className="section py-20 bg-[#01060e] text-white">
       <div className="container mx-auto">
         <h2
           className="section-title text-center mb-16 text-3xl font-bold"
@@ -69,7 +69,7 @@ const Trade = () => {
                     Min: ${plan.minAmount} – Max: ${plan.maxAmount}
                   </p>
                   <p>Duration: {plan.duration} days</p>
-                  <p>Interest: {plan.interestRate ?? 0}%</p>
+                  {/* <p>Interest: {plan.interestRate ?? 0}%</p> */}
                   <p>24/7 Support Included</p>
                 </div>
                 {/* button */}

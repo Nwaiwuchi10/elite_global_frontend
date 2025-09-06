@@ -16,8 +16,8 @@ const Newsletter = () => {
           <div className="flex-1 w-full">
             <h2 className="h3 mb-4">Start mining now</h2>
             <h3 className="max-w-[348px] mb-4">
-              Join now with Elite Globe to get the latest news and start mining
-              now
+              Join now with Wealth Globe Investment to get the latest news and
+              start mining now
             </h3>
 
             <h3 className="max-w-[348px] mb-4">

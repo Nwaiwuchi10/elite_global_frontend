@@ -1,7 +1,7 @@
 // src/layouts/UserDashboardLayout.tsx
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/img/bitcon.png";
 interface UserDashboardLayoutProps {
   children: React.ReactNode;
@@ -11,9 +11,15 @@ const AdminDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
   children,
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("user");
+    localStorage.removeItem("isAdmin");
+    navigate("/", { replace: true });
+  };
   return (
-    <div className="flex h-screen bg-white text-darkblue">
+    <div className="flex h-screen bg-[] text-darkblue">
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-white text-darkblue shadow-lg transition-transform duration-300 ease-in-out border-r border-gray-200
@@ -29,7 +35,7 @@ const AdminDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
         </div>
         <nav className="p-4 space-y-2">
           <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
-            🏠 <Link to="/adminPage">Home</Link>
+            🏠 <Link to="/admin/dashboard">Home</Link>
           </a>
           <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
             📄 <Link to="/view/deposit"> Deposit Request</Link>
@@ -52,14 +58,28 @@ const AdminDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
             📄 <Link to="/view/plan">View Investment Plan</Link>
           </a>
           <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
-            📄 <Link to="/adminPage">Show All Users</Link>
+            📄 <Link to="/admin/dashboard">Show All Users</Link>
           </a>
-          <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
+          <a
+            href="https://mail.hostinger.com/"
+            target="blank"
+            className="block px-3 py-2 rounded-lg text-blue-900"
+          >
+            📄 Web Mail
+          </a>
+          <Link
+            to="/change-password"
+            className="block px-3 py-2 rounded-lg text-blue-900"
+          >
             ⚙️ Settings
-          </a>
-          <a href="#" className="block px-3 py-2 rounded-lg text-blue-900">
+          </Link>
+          <button
+            style={{ cursor: "pointer" }}
+            className="block px-3 py-2 rounded-lg text-blue-900"
+            onClick={handleLogout}
+          >
             🚪 Logout
-          </a>
+          </button>
         </nav>
       </aside>
 
@@ -87,7 +107,7 @@ const AdminDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
                   />{" "}
                 </span>
 
-                <span className="text-2xl font-extrabold"> Elite Globe</span>
+                <span className="text-2xl font-extrabold">Wealth Globe</span>
               </span>
             </a>
             {/* Welcome Back 👋 */}

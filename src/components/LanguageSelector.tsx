@@ -16,7 +16,18 @@ const LanguageSelector: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <div id="google_translate_element" className="my-2" />;
+  return (
+    <div
+      id="google_translate_element"
+      className="-mt-[30px]"
+      style={{
+        position: "fixed", // stays in place even when scrolling
+        bottom: 170, // distance from bottom
+        right: 10, // distance from left
+        zIndex: 1000, // always on top
+      }}
+    />
+  );
 };
 
 export default LanguageSelector;
