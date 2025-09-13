@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UserDashboardLayout from "../UserDashboard/DashboardLayout";
 import { Base_url } from "../../Api/BaseUrl";
+import { useNavigate } from "react-router-dom";
 
 interface User {
   _id: string;
@@ -14,6 +15,7 @@ interface User {
 }
 
 const ViewProfile: React.FC = () => {
+  const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const [user, setUser] = useState<User | null>(null);
 
@@ -53,6 +55,21 @@ const ViewProfile: React.FC = () => {
               <span className="font-semibold">Referral Code:</span>{" "}
               {user.referralCode}
             </p>
+            {user?.referralCode && (
+              <p>
+                <span className="font-semibold">Referral Link:</span>{" "}
+                <span className="text-blue-600 underline cursor-pointer">
+                  <button
+                    onClick={() =>
+                      navigate(`/register?ref=${user.referralCode}`)
+                    }
+                  >
+                    {" "}
+                    {`${window.location.origin}/register?ref=${user.referralCode}`}
+                  </button>
+                </span>
+              </p>
+            )}
             {user.referredBy && (
               <p>
                 <span className="font-semibold">Referred By:</span>{" "}

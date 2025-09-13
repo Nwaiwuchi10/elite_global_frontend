@@ -9,7 +9,7 @@ const Features = () => {
       <div className="container mx-auto">
         <div className="text-center max-w-[758px] mx-auto mb-24">
           <h2
-            className="section-title"
+            className="section-title text-[20px]"
             data-aos="fade-up"
             data-aos-offset="400"
           >

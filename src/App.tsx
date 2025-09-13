@@ -1,7 +1,7 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Homepage from "./pages/Home/Homepage";
-import LanguageSelector from "./components/LanguageSelector";
+// import LanguageSelector from "./components/LanguageSelector";
 import Register from "./Screens/Register/Register";
 import Login from "./Screens/Login/Login";
 import DashboardHome from "./Dashboard/UserDashboard/DashboardHome";
@@ -26,6 +26,7 @@ import UserWithdrawalTable from "./Dashboard/WithdrawalRequest/WithdrawalTable";
 import UserDepositTableHistory from "./Dashboard/Deposit/UserDepositHistory";
 import ViewProfile from "./Dashboard/ViewProfile/ViewProfile";
 import ChangePassword from "./Dashboard/PasswordChange/ChangePassword";
+import LanguageSelector from "./components/LanguageSelector";
 
 function App() {
   const navigate = useNavigate();
@@ -39,18 +40,19 @@ function App() {
     } else if (userId) {
       // ✅ If logged in, go to dashboard
       navigate("/dashboard", { replace: true });
-    } else {
-      // ❌ If not logged in, go to home
-      navigate("/", { replace: true });
     }
+    // else {
+    //   // ❌ If not logged in, go to home
+    //   navigate("/", { replace: true });
+    // }
   }, []);
   return (
     <>
       <div className="bg-darkblue">
         {/* <Support /> */}
-        <div style={{ position: "absolute", top: 10, right: 10, zIndex: 1000 }}>
+        {/* <div style={{ position: "absolute", top: 10, right: 10, zIndex: 1000 }}>
           <LanguageSelector />
-        </div>
+        </div> */}
 
         {/* <Whatsapp /> */}
         <Routes>

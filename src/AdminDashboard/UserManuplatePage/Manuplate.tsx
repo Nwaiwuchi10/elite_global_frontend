@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Base_url } from "../../Api/BaseUrl";
 import AdminDashboardLayout from "../Dashboard/AdminDashboard";
+import { GetAllDepositApi, TradingAccountApi } from "../../Api/Api";
 interface AdminWallet {
   _id: string;
   walletName: string;
@@ -31,6 +32,22 @@ interface User {
   firstName: string;
   lastName: string;
   email: string;
+  referralBalance: string;
+}
+
+interface TradingAccount {
+  availableBalance: number;
+  totalWithdrawal: number;
+  earnedFund: number;
+  totalDeposits: number;
+  cumulative: number;
+}
+interface TransactSum {
+  totalWithdrawals: number;
+  totalDeposits: number;
+}
+interface DepoSum {
+  totalDeposits: number;
 }
 const Manuplate = () => {
   const { id } = useParams<{ id: string }>();
@@ -43,7 +60,53 @@ const Manuplate = () => {
   const [interestRate, setInterestRate] = useState<string>("");
   const [reduceAmount, setReduceAmount] = useState<string>("");
   const [earnedBalance, setEarnedBalance] = useState<string>("");
-
+  const [account, setAccount] = useState<TradingAccount | null>(null);
+  const [depositSum, setDeposiSum] = useState<DepoSum | null>(null);
+  const [transactionSum, setTransaction] = useState<TransactSum | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${TradingAccountApi}/${id}`);
+        setAccount(res.data);
+      } catch (err: any) {
+        setError("Failed to load trading account.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAccount();
+  }, []);
+  useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${TradingAccountApi}/summary/${userId}`);
+        setTransaction(res.data);
+      } catch (err: any) {
+        setError("Failed to load trading account.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAccount();
+  }, []);
+  useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${GetAllDepositApi}/total/${userId}`);
+        setDeposiSum(res.data);
+      } catch (err: any) {
+        setError("Failed to load trading account.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAccount();
+  }, []);
   const callApi = async (url: string, body?: any) => {
     try {
       const res = await axios.patch(`${Base_url}${url}`, body);
@@ -53,9 +116,18 @@ const Manuplate = () => {
       alert(err.response?.data?.message || "Error");
     }
   };
+  const DeleteApi = async (url: string) => {
+    try {
+      const res = await axios.delete(`${Base_url}${url}`);
+      alert("User deleted successfully!");
+      return res.data;
+    } catch (err: any) {
+      alert(err.response?.data?.message || "Error deleting user");
+    }
+  };
   //   const userId = localStorage.getItem("userId");
   const [withdrawals, setWithdrawals] = useState<Withdrawal[]>([]);
-  const [loading, setLoading] = useState(false);
+
   const [user, setUser] = useState<User | null>(null);
   const fetchUser = async () => {
     try {
@@ -133,13 +205,54 @@ const Manuplate = () => {
           >
             Block User Login
           </button>
+          <div>
+            <h2 className="text-xl mt-4 font-semibold mb-4">Delete User</h2>
+            <button
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              onClick={() => DeleteApi(`/users/${userId}`)}
+            >
+              Delete User
+            </button>
+          </div>
         </section>
 
         {/* Referral Section */}
         <section className="p-6 border rounded-xl shadow-md space-y-4">
           <h2 className="text-xl font-semibold">Referral Management</h2>
-
           <div className="flex items-center gap-2">
+            <input
+              type="number"
+              value={referralBalance}
+              onChange={(e) => setReferralBalance(e.target.value)}
+              placeholder="Enter referral balance"
+              className="border p-2 rounded w-48 text-black"
+            />
+
+            {/* Increase Button */}
+            <button
+              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+              onClick={() =>
+                callApi(`/users/${userId}/referral/increase`, {
+                  amount: Number(referralBalance),
+                })
+              }
+            >
+              Increase Referral Balance
+            </button>
+
+            {/* Reduce Button */}
+            <button
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              onClick={() =>
+                callApi(`/users/${userId}/referral/reduce`, {
+                  amount: Number(referralBalance),
+                })
+              }
+            >
+              Reduce Referral Balance
+            </button>
+          </div>
+          {/* <div className="flex items-center gap-2">
             <input
               type="number"
               value={referralBalance}
@@ -157,9 +270,9 @@ const Manuplate = () => {
             >
               Update Referral Balance
             </button>
-          </div>
+          </div> */}
 
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <input
               type="number"
               value={referralCount}
@@ -177,7 +290,7 @@ const Manuplate = () => {
             >
               Update Referral Count
             </button>
-          </div>
+          </div> */}
         </section>
 
         {/* Investment Section */}
@@ -218,7 +331,51 @@ const Manuplate = () => {
             </button>
           </div>
         </section>
+        <section className="p-6 border rounded-xl shadow-md space-y-4">
+          <h2 className="text-xl font-semibold">Client Avaliable Balance</h2>
 
+          {/* Increase Balance */}
+          <div className="flex items-center gap-2">
+            <input
+              type="number"
+              value={earnedBalance}
+              onChange={(e) => setEarnedBalance(e.target.value)}
+              placeholder="Enter amount"
+              className="border p-2 rounded w-48 text-black"
+            />
+            <button
+              className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+              onClick={() =>
+                callApi(`/tradingaccount/${userId}/increase-balance`, {
+                  amount: Number(earnedBalance),
+                })
+              }
+            >
+              Increase Available Balance
+            </button>
+          </div>
+
+          {/* Reduce Balance */}
+          <div className="flex items-center gap-2 mt-4">
+            <input
+              type="number"
+              value={reduceAmount}
+              onChange={(e) => setReduceAmount(e.target.value)}
+              placeholder="Amount to reduce"
+              className="border p-2 rounded w-48 text-black"
+            />
+            <button
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              onClick={() =>
+                callApi(`/tradingaccount/${userId}/reduce-balance`, {
+                  amount: Number(reduceAmount),
+                })
+              }
+            >
+              Reduce Avaliable Balance
+            </button>
+          </div>
+        </section>
         {/* Trading Account Section */}
         <section className="p-6 border rounded-xl shadow-md space-y-4">
           <h2 className="text-xl font-semibold">Trading Account</h2>
@@ -260,7 +417,7 @@ const Manuplate = () => {
                 })
               }
             >
-              Add to Earned Fund
+              Increase Earned Balance
             </button>
             {/* Reduce Earned Fund */}
 
@@ -292,8 +449,58 @@ const Manuplate = () => {
                 })
               }
             >
-              Reduce Earned Fund
+              Reduce Earned Fund Balance
             </button>
+          </div>
+        </section>
+        <section>
+          <div className="bg-white border border-blue-900 mb-4 shadow-md rounded-2xl p-6">
+            <h2 className="text-lg font-semibold text-blue-900">
+              Available Balance
+            </h2>
+            <p className="text-2xl font-bold text-blue-900 mt-4">
+              ${account?.availableBalance}
+            </p>
+          </div>
+
+          {/* Total Withdrawal */}
+          <div className="bg-white border border-blue-900 mb-4 shadow-md rounded-2xl p-6">
+            <h2 className="text-lg font-semibold text-blue-900">
+              Total Withdrawal
+            </h2>
+            <p className="text-2xl font-bold text-blue-900 mt-4">
+              ${transactionSum?.totalWithdrawals || 0}
+            </p>
+          </div>
+
+          {/* Earned Funds */}
+          <div className="bg-white border border-blue-900 mb-4 shadow-md rounded-2xl p-6">
+            <h2 className="text-lg font-semibold text-blue-900">
+              Earned Funds
+            </h2>
+            <p className="text-2xl font-bold text-blue-900 mt-4">
+              ${account?.earnedFund}
+            </p>
+          </div>
+
+          {/* refferal balance */}
+          <div className="bg-white border border-blue-900 mb-4 shadow-md rounded-2xl p-6">
+            <h2 className="text-lg font-semibold text-blue-900">
+              Referral Balance
+            </h2>
+            <p className="text-2xl font-bold text-blue-900 mt-4">
+              ${user?.referralBalance}
+            </p>
+          </div>
+
+          {/* Total Deposits */}
+          <div className="bg-white border border-blue-900 shadow-md rounded-2xl p-6">
+            <h2 className="text-lg font-semibold text-blue-900">
+              Total Deposits
+            </h2>
+            <p className="text-2xl font-bold text-blue-900 mt-4">
+              ${depositSum?.totalDeposits || 0}
+            </p>
           </div>
         </section>
         <section>

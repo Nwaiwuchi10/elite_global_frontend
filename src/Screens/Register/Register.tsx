@@ -41,12 +41,19 @@ const Register: React.FC = () => {
     lastName: "",
     country: "",
     password: "",
+    referralCode: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const ref = params.get("ref");
+    if (ref) {
+      setForm((prev) => ({ ...prev, referralCode: ref }));
+    }
+  }, [location.search]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -91,6 +98,7 @@ const Register: React.FC = () => {
           lastName: form.lastName,
           country: form.country,
           password: form.password,
+          referralCode: form.referralCode,
         },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -102,6 +110,7 @@ const Register: React.FC = () => {
         lastName: "",
         country: "",
         password: "",
+        referralCode: "",
       });
       console.log("Register response", res.data);
       navigate("/dashboard");
@@ -327,6 +336,17 @@ const Register: React.FC = () => {
                       {showPassword ? "Hide" : "Show"}
                     </button>
                   </div>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="referralCode"
+                    placeholder="Referral Code (optional)"
+                    value={form.referralCode}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded text-black"
+                    readOnly={!!form.referralCode} // lock if from URL
+                  />
                 </div>
 
                 <button

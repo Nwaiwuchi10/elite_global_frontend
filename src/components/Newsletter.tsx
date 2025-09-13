@@ -14,10 +14,12 @@ const Newsletter = () => {
         >
           {/* text */}
           <div className="flex-1 w-full">
-            <h2 className="h3 mb-4">Start mining now</h2>
-            <h3 className="max-w-[348px] mb-4">
+            <h2 className="h3 mb-4 text-[26px] font-bold">
+              Start Investing now
+            </h2>
+            <h3 className="max-w-[348px] mb-4 text-[20px]">
               Join now with Wealth Globe Investment to get the latest news and
-              start mining now
+              start Investing now
             </h3>
 
             <h3 className="max-w-[348px] mb-4">

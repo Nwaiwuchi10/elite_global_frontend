@@ -1,9 +1,11 @@
 // import images
-import Image from "../assets/img/hero-img.png";
+// import Image from "../assets/img/hero-img.png";
 
 // import icons
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import TradingViewChart from "./TradingViewChart";
+import LanguageSelector from "./LanguageSelector";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ const Hero = () => {
               data-aos="fade-down"
               data-aos-delay="400"
             >
+              {/* <LanguageSelector /> */}
               <div className="flex items-center justify-between text-sm lg:text-base">
                 <div className="bg-white text-darkblue rounded-full font-medium py-1 px-4 text-blue-900">
                   100% SAVE
@@ -28,19 +31,21 @@ const Hero = () => {
             </div>
             {/* title */}
             <h1
-              className="text-[32px] lg:text-[64px] font-bold leading-tight mb-6"
+              className="text-[32px] lg:text-[54px] font-bold leading-tight mb-6"
               data-aos="fade-down"
               data-aos-delay="500"
             >
-              Fastest & secure platform to invest in Bitcoin.
+              Welcome To Wealth Globe
             </h1>
             <p
-              className="max-w-[440px] leading-relaxed mb-8"
+              className="max-w-[440px] leading-relaxed mb-8 text-[20px]"
               data-aos="fade-down"
               data-aos-delay="600"
             >
-              Buy and sell cryptocurrencies, trusted by 10M wallets with over
-              $30 billion in transactions.
+              automated Investment platform operating with no human
+              intervention, aside from regular server maintenance conducted by
+              our staffs, take full advantage of our fast Bitcoin investment
+              platform
             </p>
             <button
               style={{ cursor: "pointer" }}
@@ -54,8 +59,9 @@ const Hero = () => {
             </button>
           </div>
           {/* hero image */}
-          <div className="flex-1">
-            <img src={Image} alt="" data-aos="fade-up" data-aos-delay="600" />
+          <div className="flex-1 mt-10 lg:mt-0">
+            <TradingViewChart />
+            {/* <img src={Image} alt="" data-aos="fade-up" data-aos-delay="600" /> */}
           </div>
         </div>
       </div>

@@ -3,6 +3,8 @@ import Logo from "../assets/img/bitcoin.png";
 
 import BitcoinImg from "../assets/img/bitcoin.png";
 
+import BitcoinImg2 from "../assets/img/applepix.png";
+
 // import icons
 import {
   IoLogoYoutube,
@@ -24,7 +26,7 @@ const Footer = () => {
             <a href="#">
               <span className="flex justify-evenly items-center gap-6">
                 <img src={Logo} alt="" />{" "}
-                <span className="text-2xl font-extrabold"> Bit Globe</span>
+                <span className="text-2xl font-extrabold"> Wealth Globe</span>
               </span>
             </a>
           </div>
@@ -103,6 +105,18 @@ const Footer = () => {
                 {/* <img src={VisaImg} alt="" />
                 <img src={MastercardImg} alt="" /> */}
                 <img src={BitcoinImg} alt="" />
+                <span style={{ width: "100px" }}>
+                  {" "}
+                  <img
+                    src={BitcoinImg2}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </span>
               </div>
             </div>
           </div>

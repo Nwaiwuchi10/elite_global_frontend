@@ -57,7 +57,7 @@ import Newsletter from "../../components/Newsletter";
 import Features from "../../components/Features";
 import Trade from "../../components/Trade";
 import TradingTicker from "../../components/TradingTicker";
-import Why from "../../components/Why";
+
 import { useState } from "react";
 
 const Homepage = () => {
@@ -65,21 +65,6 @@ const Homepage = () => {
 
   return (
     <div className="relative min-h-screen bg-darkblue text-white overflow-hidden">
-      {/* Particles Background */}
-      {/* <Particles
-        id="tsparticles"
-        className="absolute top-0 left-0 w-full h-full -z-10"
-        options={{
-          background: { color: { value: "black" } }, // black bg to see clearly
-          particles: {
-            number: { value: 100 },
-            size: { value: 3 },
-            move: { enable: true, speed: 1 },
-            color: { value: "#ffffff" },
-          },
-        }}
-      /> */}
-
       {/* Homepage Content */}
       <div className="relative z-10 ">
         <Header setNavMobile={setNavMobile} />
@@ -95,7 +80,7 @@ const Homepage = () => {
         </div>
 
         <Stats />
-        <Why />
+        {/* <Why /> */}
         <TradingTicker />
         <Trade />
         <Features />

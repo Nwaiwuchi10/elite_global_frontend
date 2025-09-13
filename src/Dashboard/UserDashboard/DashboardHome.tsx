@@ -10,6 +10,16 @@ import {
   TradingAccountApi,
   UserInvestPlanApi,
 } from "../../Api/Api";
+import { Base_url } from "../../Api/BaseUrl";
+interface User {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  country: string;
+  referralCode: string;
+  referredBy?: string;
+}
 interface TradingAccount {
   availableBalance: number;
   totalWithdrawal: number;
@@ -50,6 +60,21 @@ const DashboardHome = () => {
 
   const [error, setError] = useState("");
   const userId = localStorage.getItem("userId");
+  const [user, setUser] = useState<User | null>(null);
+
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get<User>(`${Base_url}/users/${userId}`);
+      setUser(res.data);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, [userId]);
+
   // Replace with your real endpoint
   //   const apiUrl = "http://localhost:5000/trading-account/getAccount/USER_ID";
 
@@ -129,6 +154,17 @@ const DashboardHome = () => {
               A glance summary of your Trading account. Have a nice day!
             </p>
           </div>
+          <h2 className="text-xl text-blue-900">Reffer and Earn Money</h2>
+          <span className="font-semibold">Referral Link:</span>
+          <span className="text-blue-600 underline cursor-pointer">
+            <button
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate(`/register?ref=${user?.referralCode}`)}
+            >
+              {`${window.location.origin}/register?ref=${user?.referralCode}`}
+            </button>
+          </span>
+          <p> </p>
           {/* <h1 className="text-3xl font-bold text-darkblue">Welcome!</h1> */}
           <h2 className="text-xl text-gray-700">New user</h2>
           <p className="text-lg text-gray-800 leading-relaxed">

@@ -1,5 +1,5 @@
 // import image
-import Image1 from "../assets/img/feature-1-img.png";
+import Image1 from "../assets/img/about-left.png";
 
 const FeaturesSection1 = () => {
   return (
@@ -11,8 +11,8 @@ const FeaturesSection1 = () => {
           data-aos="fade-right"
           data-aos-offset="400"
         >
-          <h3 className="h3 mb-6">Invest Smart</h3>
-          <p className="text-gray mb-8">
+          <h3 className="h3 mb-6 text-[26px] font-bold">Invest Smart</h3>
+          <p className="text-gray mb-8 text-[20px]">
             Get full statistic information about the behavior of buyers and
             sellers will help you to make the decision.
           </p>

@@ -70,6 +70,9 @@ const AdminDashboardHome: React.FC = () => {
               <table className="min-w-full divide-y divide-gray-200 text-sm md:text-base">
                 <thead className="bg-darkblue text-white">
                   <tr>
+                    <th className="px-4 py-3 text-left text-blue-900">
+                      Serial No
+                    </th>
                     <th className="px-4 py-3 text-left text-blue-900">Name</th>
                     <th className="px-4 py-3 text-left text-blue-900">Email</th>
                     <th className="px-4 py-3 text-left text-blue-900">
@@ -91,11 +94,14 @@ const AdminDashboardHome: React.FC = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {filteredUsers.length > 0 ? (
-                    filteredUsers.map((user) => (
+                    filteredUsers.map((user, index) => (
                       <tr
                         key={user._id}
                         className="hover:bg-gray-50 text-blue-900 transition duration-150"
                       >
+                        <td className="px-4 py-3 text-blue-900 font-medium">
+                          {index + 1}
+                        </td>
                         <td className="px-4 py-3 font-medium text-blue-900">
                           {user.firstName} {user.lastName}
                         </td>

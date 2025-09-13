@@ -3,7 +3,7 @@ import { HiChartBar, HiUser, HiGlobe } from "react-icons/hi";
 
 const Stats = () => {
   return (
-    <section className="pt-24" data-aos="fade-up" data-aos-delay="1200">
+    <section className="pt-24 pb-12" data-aos="fade-up" data-aos-delay="1200">
       <div className="container mx-auto">
         <div className="flex flex-col gap-y-6 lg:flex-row lg:justify-between">
           {/* item */}
@@ -15,7 +15,7 @@ const Stats = () => {
             {/* item text */}
             <div>
               <div className="text-2xl font-bold lg:text-[40px] lg:mb-2">
-                $30B
+                $20B
               </div>
               <div className="text-gray">Digital Currency Exchanged</div>
             </div>
@@ -43,7 +43,7 @@ const Stats = () => {
             {/* item text */}
             <div>
               <div className="text-2xl font-bold lg:text-[40px] lg:mb-2">
-                195
+                186
               </div>
               <div className="text-gray">Countries Supported</div>
             </div>

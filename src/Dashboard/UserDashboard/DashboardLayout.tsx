@@ -48,10 +48,10 @@ const UserDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
   };
 
   return (
-    <div className="flex h-screen bg-green text-white">
+    <div className="flex h-screen ">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-[#01060e] text-white shadow-lg transition-transform duration-300 ease-in-out border-r border-gray-200
+        className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-white text-blue-900 shadow-lg transition-transform duration-300 ease-in-out border-r border-gray-200
         ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
@@ -116,9 +116,9 @@ const UserDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
       </aside>
 
       {/* Content Wrapper */}
-      <div className=" bg-green flex flex-1 flex-col lg:ml-64">
+      <div className="flex flex-1 flex-col lg:ml-64">
         {/* Top Navbar */}
-        <header className="flex items-center justify-between bg-[#01060e] text-darkblue shadow px-4 py-3 border-b border-gray-200">
+        <header className="flex items-center justify-between bg-white text-blue-900 shadow px-4 py-3 border-b border-gray-200">
           <button className="lg:hidden" onClick={() => setSidebarOpen(true)}>
             <MenuIcon className="w-6 h-6 text-blue-900" />
           </button>
@@ -187,7 +187,7 @@ const UserDashboardLayout: React.FC<UserDashboardLayoutProps> = ({
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 overflow-y-auto bg-[#01060e] text-white">
+        <main className="flex-1 p-4 overflow-y-auto bg-white text-blue-900">
           {children}
         </main>
       </div>

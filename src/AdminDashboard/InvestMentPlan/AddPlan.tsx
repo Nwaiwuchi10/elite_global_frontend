@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { AddInvestmentPlanApi } from "../../Api/Api"; // <-- define this in your Api.ts
 import AdminDashboardLayout from "../Dashboard/AdminDashboard";
+import { useNavigate } from "react-router-dom";
 
 const AdminAddPlanForm: React.FC = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [planName, setPlanName] = useState("");
   const [minAmount, setMinAmount] = useState<number | "">("");
   const [maxAmount, setMaxAmount] = useState<number | "">("");
@@ -26,7 +27,7 @@ const AdminAddPlanForm: React.FC = () => {
           minAmount,
           maxAmount,
           duration,
-          interestRate,
+          interestRate: interestRate || 0,
         },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -37,7 +38,7 @@ const AdminAddPlanForm: React.FC = () => {
       setMaxAmount("");
       setDuration("");
       setInterestRate("");
-      //   navigate("/view/plan");
+      navigate("/view/plan");
       console.log("Response:", res.data);
     } catch (error: any) {
       setMessage(error.response?.data?.message || "❌ Failed to create plan");
