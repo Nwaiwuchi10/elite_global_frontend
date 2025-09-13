@@ -26,7 +26,6 @@ import UserWithdrawalTable from "./Dashboard/WithdrawalRequest/WithdrawalTable";
 import UserDepositTableHistory from "./Dashboard/Deposit/UserDepositHistory";
 import ViewProfile from "./Dashboard/ViewProfile/ViewProfile";
 import ChangePassword from "./Dashboard/PasswordChange/ChangePassword";
-import LanguageSelector from "./components/LanguageSelector";
 
 function App() {
   const navigate = useNavigate();

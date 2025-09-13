@@ -5,7 +5,6 @@
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import TradingViewChart from "./TradingViewChart";
-import LanguageSelector from "./LanguageSelector";
 
 const Hero = () => {
   const navigate = useNavigate();

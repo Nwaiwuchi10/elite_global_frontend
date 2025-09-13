@@ -56,7 +56,7 @@ const Manuplate = () => {
 
   // separate states for each input
   const [referralBalance, setReferralBalance] = useState<string>("");
-  const [referralCount, setReferralCount] = useState<string>("");
+
   const [interestRate, setInterestRate] = useState<string>("");
   const [reduceAmount, setReduceAmount] = useState<string>("");
   const [earnedBalance, setEarnedBalance] = useState<string>("");
@@ -64,7 +64,7 @@ const Manuplate = () => {
   const [depositSum, setDeposiSum] = useState<DepoSum | null>(null);
   const [transactionSum, setTransaction] = useState<TransactSum | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+
   useEffect(() => {
     const fetchAccount = async () => {
       try {
@@ -72,7 +72,6 @@ const Manuplate = () => {
         const res = await axios.get(`${TradingAccountApi}/${id}`);
         setAccount(res.data);
       } catch (err: any) {
-        setError("Failed to load trading account.");
       } finally {
         setLoading(false);
       }
@@ -86,7 +85,6 @@ const Manuplate = () => {
         const res = await axios.get(`${TradingAccountApi}/summary/${userId}`);
         setTransaction(res.data);
       } catch (err: any) {
-        setError("Failed to load trading account.");
       } finally {
         setLoading(false);
       }
@@ -100,7 +98,6 @@ const Manuplate = () => {
         const res = await axios.get(`${GetAllDepositApi}/total/${userId}`);
         setDeposiSum(res.data);
       } catch (err: any) {
-        setError("Failed to load trading account.");
       } finally {
         setLoading(false);
       }
